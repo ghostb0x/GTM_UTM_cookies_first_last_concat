@@ -1,0 +1,116 @@
+<script>
+  
+  //assemble any existing last_touch cookie names into array
+  var delete_last_touch_cookies = ["last_touch_utm_source", "last_touch_utm_medium", "last_touch_utm_campaign", "last_touch_utm_term", "last_touch_utm_content", "last_touch_utm_id", "last_touch_dateTime", "last_touch_landing_url"];
+  
+  //delete any existing last touch cookies
+  
+  for (var i = 0; i < delete_last_touch_cookies.length; i++) {
+    {{Function - create_cookie()}}(delete_last_touch_cookies[i], null, -1);
+  };
+ 
+  // define new last touch cookies
+  
+  //get current datetime (ISO is GMT time)
+  var date = new Date();
+  var currentDateTime = date.toISOString();
+  
+  
+  // full url looks like e.g. url.com?utm_source=hubspot&utm_medium=email
+  
+  
+  var pageURL = {{Page URL}};
+  
+  // Array.split returns array of length 2, each element being either side of split character
+  // in example, array URLVariables=["utm_source=hubspot","utm_medium=email"]
+  
+  var paramString = pageURL.split('?')[1];  
+  
+  var URLVariables = paramString.split('&');
+  
+  //create cookie values as empty strings to be overwritten
+  var vals_to_cookie_obj = {
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: "",
+    utm_id: "",
+    landing_url: pageURL
+  };
+  
+  for (var i = 0; i < URLVariables.length; i++) {
+    var split_key_val = URLVariables[i].split('=');
+    var utm_name = split_key_val[0];
+    var utm_value = split_key_val[1];
+    vals_to_cookie_obj[utm_name] = utm_value;
+  };
+  
+  //overwrite any undefined or empty string value as 'none'
+  for (key in vals_to_cookie_obj) {
+    if (!vals_to_cookie_obj[key]) {
+      vals_to_cookie_obj[key] = "none";
+    };
+  };
+  
+  
+  //set last_touch_utm cookies to current values
+  
+  {{Function - create_cookie()}}("last_touch_dateTime", currentDateTime, 90);
+  
+  for (key in vals_to_cookie_obj) {
+    {{Function - create_cookie()}}("last_touch_"+key, vals_to_cookie_obj[key], 90);
+  };
+    
+
+  //check if first touch exists
+  //if so, we skip first touch update and only concatenate last touch to existing concat touch
+ 
+  var first_touch_dateTime = {{Cookie - first_touch_dateTime}}
+   
+  if (Date.parse(first_touch_dateTime)) {
+    
+  // if true, proceed with concat update
+    
+  //create object of existing concat values to be used in concatenation update
+  var concats = {
+    utm_source: {{Cookie - concat_touch_utm_source}},
+    utm_medium: {{Cookie - concat_touch_utm_medium}},
+    utm_campaign: {{Cookie - concat_touch_utm_campaign}},
+    utm_term: {{Cookie - concat_touch_utm_term}},
+    utm_content: {{Cookie - concat_touch_utm_content}},
+    utm_id: {{Cookie - concat_touch_utm_id}},
+    dateTime: {{Cookie - concat_touch_dateTime}},
+    landing_url: {{Cookie - concat_touch_landing_url}}
+  };
+  
+  
+    //and concat last touch to existing concats
+    {{Function - create_cookie()}}("concat_touch_dateTime", concats.dateTime+"+"+currentDateTime, 90);
+  
+    //set concat touch utm vals
+  
+   
+    for (key in vals_to_cookie_obj) {
+      {{Function - create_cookie()}}("concat_touch_"+key, concats[key]+"+"+vals_to_cookie_obj[key], 90);
+    };
+    
+
+    } else {
+      
+      //if first touch does not yet exist, create first touch cookies and concatenated touch cookies
+      // note - the first entry of concat touch cookie is identical to first touch cookie
+      
+      //set first touch and concat touch dateTime vals
+      {{Function - create_cookie()}}("first_touch_dateTime", currentDateTime, 90);
+      {{Function - create_cookie()}}("concat_touch_dateTime", currentDateTime, 90);
+
+
+      //set first touch and concat touch utm vals
+      for (key in vals_to_cookie_obj) {
+        {{Function - create_cookie()}}("first_touch_"+key, vals_to_cookie_obj[key], 90);
+        {{Function - create_cookie()}}("concat_touch_"+key, vals_to_cookie_obj[key], 90);
+      };
+  };
+
+</script>
