@@ -4,6 +4,8 @@ Use Google Tag Manager to create cookies on your website (with GTM installed), t
 
 This example code uses UTM values pulled from the visitor's URL when they land to create and store cookie values in a series of cookies (first, last, and concatenated touch for all major UTM value and also date/time of landing and landing page url).
 
+*********
+
 **Important, consider cookie consent settings and privacy laws like GDPR when creating your cookies and triggers. You may need to configure your trigger to only fire on all pages AFTER consent has been given and recorded by GTM.** 
 
 Note that GDPR protection applies to any EU citizens visiting your site, not just companies based in the EU, so odds are you need to do something like this to get your gold star for total compliance.
@@ -12,7 +14,7 @@ If these laws apply to your website and visitors, you'll also likely need to dec
 
 There are many guides online for how to configure GTM to do first after consent is granted, and the specifics will largely depend upon if you have a cookie consent management vendor already and who that is. I won't go any deeper into configuring triggers for privacy here, but please be mindful of this when you set this system up.
 
-
+**********
 
 Credit to Vlad from EZSegment for writing this article to help me get familiar with GTM and cookie use: https://ezsegment.com/read-and-write-cookies-in-gtm/
 
