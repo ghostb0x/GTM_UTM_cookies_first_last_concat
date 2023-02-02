@@ -18,9 +18,9 @@ There are many guides online for how to configure GTM triggers to fire only afte
 
 Credit to Vlad from EZSegment for writing this article to help me get familiar with GTM and cookie use: https://ezsegment.com/read-and-write-cookies-in-gtm/
 
-##Steps to get URL parameter / UTM capture via Google Tag Manager working on your site:
+## Steps to get URL parameter / UTM capture via Google Tag Manager working on your site:
 
-###Part 1: Creating browser tracking cookies via GTM based on UTM values
+### Part 1: Creating browser tracking cookies via GTM based on UTM values
 
 1. Install GTM on your website - be sure to include the `<script>` tag code in the `<head>` and `<body>` of your site. Test using GTM's preview mode to make sure your instance is sending data.
 
@@ -34,7 +34,7 @@ Credit to Vlad from EZSegment for writing this article to help me get familiar w
 
 **Again --- consider cookie consent settings and privacy laws like GDPR when creating your cookies and triggers. You may need to configure your trigger to only fire on all pages AFTER consent has been given and recorded by GTM.** 
 
-###Part 2: Inserting cookie values to form fields via Google Tag Manager
+### Part 2: Inserting cookie values to form fields via Google Tag Manager
 
 6. Create a new Tag in your instance that contains the code from this github repo's "push_cookie_values_to_hubspot_form.html" file - adjust the code to match your GTM cookie variable and form field selector names.
 
