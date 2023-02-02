@@ -1,3 +1,6 @@
+//This code should be saved as a VARIABLE in your GTM Instance, and referenced using GTM Variable syntax, e.g. {{GTM Variable Name}}
+//in the tag where cookie values are created. Use the code in this same branch at /create_cookie_values_tag.html for that
+
 function() {
   return function (name, value, days) {
     var myDomain = {{Page Hostname}};
