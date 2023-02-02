@@ -12,7 +12,7 @@ Note that GDPR protection applies to any EU citizens visiting your site, not jus
 
 If these laws apply to your website and visitors, you'll also likely need to declare the names and descriptions of all cookies you'll be creating in your cookie consent manager tool. 
 
-There are many guides online for how to configure GTM to do first after consent is granted, and the specifics will largely depend upon if you have a cookie consent management vendor already and who that is. I won't go any deeper into configuring triggers for privacy here, but please be mindful of this when you set this system up.
+There are many guides online for how to configure GTM triggers to fire only after consent is granted, and the specifics will largely depend upon if you have a cookie consent management vendor already and who that is. I won't go any deeper into configuring triggers for privacy here, but please be mindful of this when you set this system up.
 
 **********
 
