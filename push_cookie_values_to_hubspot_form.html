@@ -1,11 +1,8 @@
 <script>
 (function () {
 
-  // note - "datetime" in this case is lowercase due to how the css selector is automatically created for hubspot forms. 
-  // This does not match with the camel case variable name created in GTM
-  
   var cookie_field_pairs = {
-    first_touch_datetime: {{Cookie - first_touch_dateTime}},
+    first_touch_date: {{Cookie - first_touch_date}},
     first_touch_landing_url: {{Cookie - first_touch_landing_url}},
     first_touch_utm_source: {{Cookie - first_touch_utm_source}},
     first_touch_utm_medium: {{Cookie - first_touch_utm_medium}},
@@ -13,7 +10,7 @@
     first_touch_utm_term: {{Cookie - first_touch_utm_term}},
     first_touch_utm_content: {{Cookie - first_touch_utm_content}},
     first_touch_utm_id: {{Cookie - first_touch_utm_id}},
-    last_touch_datetime: {{Cookie - last_touch_dateTime}},
+    last_touch_date: {{Cookie - last_touch_date}},
     last_touch_landing_url: {{Cookie - last_touch_landing_url}},
     last_touch_utm_source: {{Cookie - last_touch_utm_source}},
     last_touch_utm_medium: {{Cookie - last_touch_utm_medium}},
@@ -21,7 +18,7 @@
     last_touch_utm_term: {{Cookie - last_touch_utm_term}},
     last_touch_utm_content: {{Cookie - last_touch_utm_content}},
     last_touch_utm_id: {{Cookie - last_touch_utm_id}},
-    concat_touch_datetime: {{Cookie - concat_touch_dateTime}},
+    concat_touch_date: {{Cookie - concat_touch_date}},
     concat_touch_landing_url: {{Cookie - concat_touch_landing_url}},
     concat_touch_utm_source: {{Cookie - concat_touch_utm_source}},
     concat_touch_utm_medium: {{Cookie - concat_touch_utm_medium}},
