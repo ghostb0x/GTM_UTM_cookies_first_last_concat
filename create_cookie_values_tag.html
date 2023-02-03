@@ -1,7 +1,7 @@
 <script>
   
   //assemble any existing last_touch cookie names into array
-  var delete_last_touch_cookies = ["last_touch_utm_source", "last_touch_utm_medium", "last_touch_utm_campaign", "last_touch_utm_term", "last_touch_utm_content", "last_touch_utm_id", "last_touch_dateTime", "last_touch_landing_url"];
+  var delete_last_touch_cookies = ["last_touch_utm_source", "last_touch_utm_medium", "last_touch_utm_campaign", "last_touch_utm_term", "last_touch_utm_content", "last_touch_utm_id", "last_touch_date", "last_touch_landing_url"];
   
   //delete any existing last touch cookies
   
@@ -14,6 +14,8 @@
   //get current datetime (ISO is GMT time)
   var date = new Date();
   var currentDateTime = date.toISOString();
+  var currentDate = currentDateTime.split('T')[0];
+  
   
   
   // full url looks like e.g. url.com?utm_source=hubspot&utm_medium=email
@@ -56,7 +58,7 @@
   
   //set last_touch_utm cookies to current values
   
-  {{Function - create_cookie()}}("last_touch_dateTime", currentDateTime, 90);
+  {{Function - create_cookie()}}("last_touch_date", currentDate, 90);
   
   for (key in vals_to_cookie_obj) {
     {{Function - create_cookie()}}("last_touch_"+key, vals_to_cookie_obj[key], 90);
@@ -66,9 +68,9 @@
   //check if first touch exists
   //if so, we skip first touch update and only concatenate last touch to existing concat touch
  
-  var first_touch_dateTime = {{Cookie - first_touch_dateTime}}
+  var first_touch_date = {{Cookie - first_touch_date}}
    
-  if (Date.parse(first_touch_dateTime)) {
+  if (Date.parse(first_touch_date)) {
     
   // if true, proceed with concat update
     
@@ -80,13 +82,13 @@
     utm_term: {{Cookie - concat_touch_utm_term}},
     utm_content: {{Cookie - concat_touch_utm_content}},
     utm_id: {{Cookie - concat_touch_utm_id}},
-    dateTime: {{Cookie - concat_touch_dateTime}},
+    date: {{Cookie - concat_touch_date}},
     landing_url: {{Cookie - concat_touch_landing_url}}
   };
   
   
     //and concat last touch to existing concats
-    {{Function - create_cookie()}}("concat_touch_dateTime", concats.dateTime+"+"+currentDateTime, 90);
+    {{Function - create_cookie()}}("concat_touch_date", concats.date+"+"+currentDate, 90);
   
     //set concat touch utm vals
   
@@ -101,9 +103,9 @@
       //if first touch does not yet exist, create first touch cookies and concatenated touch cookies
       // note - the first entry of concat touch cookie is identical to first touch cookie
       
-      //set first touch and concat touch dateTime vals
-      {{Function - create_cookie()}}("first_touch_dateTime", currentDateTime, 90);
-      {{Function - create_cookie()}}("concat_touch_dateTime", currentDateTime, 90);
+      //set first touch and concat touch date vals
+      {{Function - create_cookie()}}("first_touch_date", currentDate, 90);
+      {{Function - create_cookie()}}("concat_touch_date", currentDate, 90);
 
 
       //set first touch and concat touch utm vals
